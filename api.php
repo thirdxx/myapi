@@ -17,7 +17,7 @@ $options = [
 $pdo = new PDO($dsn, $user, $pass, $options);
 
  if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-        // GET request: Fetch data from accounts and profiles
+        // GET request: Fetch data from accounts and profile
         $stmt = $pdo->query("SELECT 
                                 accounts.username, accounts.pass, accounts.email, 
                                 profile.full_name, profile.phone_number, profile.address 
@@ -25,7 +25,6 @@ $pdo = new PDO($dsn, $user, $pass, $options);
                              LEFT JOIN profile ON accounts.account_id = profile.account_id");
         $data = $stmt->fetchAll();
 
-        // Encode each record separately
         $output = [];
         foreach ($data as $record) {
             $output[] = json_encode($record);
